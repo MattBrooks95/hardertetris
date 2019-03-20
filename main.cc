@@ -68,9 +68,6 @@ int main(int argc, char *argv[]){
 	srand(toki);//seed the random number generator
 	//############################################################
 
-	//make_test_pieces();
-	//game_access->new_active_piece();
-
 	//enter glut's infinite loop
 	glutMainLoop();
 

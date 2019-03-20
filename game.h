@@ -1,7 +1,7 @@
 //! \file game.h
 
 #pragma once
-
+#define GLM_ENABLE_EXPERIMENTAL
 #include<glm/glm.hpp>   //matrix and vector types
 #include<glm/gtx/string_cast.hpp>  //easy printing of vectors and matrices
 #include<vector>

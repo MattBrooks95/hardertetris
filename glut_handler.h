@@ -37,7 +37,7 @@
 //! struct holds uints that track the window's information
 struct rect{
 	GLuint x;  //!< store the window's horizontal location
-	GLuint y;  //!< store the window's vertical location 
+	GLuint y;  //!< store the window's vertical location
 	GLuint w;  //!< store the window's width for the window
 	GLuint h;  //!< store the window's height for the window
 };

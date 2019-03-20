@@ -17,7 +17,7 @@ using glm::vec4;
 game::game(){
 
 	//place the board in the world, by specifying it's left
-	//corner's location	
+	//corner's location
 	board_home = DEFAULT_BOARD_HOME;
 
 	//set up the 2d array of game positions
@@ -73,7 +73,7 @@ void game::calculate_positions(){
 
 		for(unsigned int d = 0; d < center_points[c].size(); d++){
 			center_points[c][d].x = this_col_x;
-			center_points[c][d].y = board_home.y + cube_radius + 
+			center_points[c][d].y = board_home.y + cube_radius +
 									(2 * cube_radius) * ((center_points[c].size() - 1) - d);
 			center_points[c][d].z = board_home.z - cube_radius;
 		}
@@ -148,8 +148,8 @@ void game::build_scene_vertices(){
 	scene_points.push_back(vec4(-40.0f, 39.0f, -40.0f, 1.0f));
 	scene_points.push_back(vec4( 40.0f, 39.0f,  40.0f, 1.0f));
 	scene_points.push_back(vec4(-40.0f, 39.0f,  40.0f, 1.0f));
-	
-	//triangles for the back 
+
+	//triangles for the back
 	scene_points.push_back(vec4( 40.0f, 39.0f,  -40.0f, 1.0f));
 	scene_points.push_back(vec4(-40.0f, 39.0f,  -40.0f, 1.0f));
 	scene_points.push_back(vec4( 40.0f, -1.0f,  -40.0f, 1.0f));
@@ -158,7 +158,7 @@ void game::build_scene_vertices(){
 	scene_points.push_back(vec4( 40.0f, -1.0f,  -40.0f, 1.0f));
 	scene_points.push_back(vec4(-40.0f, -1.0f,  -40.0f, 1.0f));
 
-	//triangles for the front 
+	//triangles for the front
 	scene_points.push_back(vec4( 40.0f, 39.0f,  40.0f, 1.0f));
 	scene_points.push_back(vec4(-40.0f, 39.0f,  40.0f, 1.0f));
 	scene_points.push_back(vec4( 40.0f, -1.0f,  40.0f, 1.0f));
@@ -292,14 +292,14 @@ void game::build_board_vertices(){
 void game::make_tet(const string& color, const tet_request& tet){
 	tetromino* new_tet = new tetromino(color,tet);
 	active_game_pieces.push_back(new_tet);
-	//active_game_pieces.push_back(tetromino(color,tet));	
+	//active_game_pieces.push_back(tetromino(color,tet));
 
 }
 */
 
 //######################################################################################
 void game::draw_scene(){
-	
+
 	//bind this cube's vertex array object
 	glBindVertexArray(my_vao);
 
@@ -319,7 +319,7 @@ void game::draw_scene(){
 	GLfloat pass_aspect = width / height;
 	glm::mat4 pass_perspective = glm::perspective((GLfloat)glm::radians(45.0),pass_aspect,(GLfloat) ZNEAR,(GLfloat) ZFAR);
 	glUniformMatrix4fv(shader_access->get_perspective(),1,GL_FALSE,&pass_perspective[0][0]);
-	
+
 	glEnable(GL_DEPTH_TEST);
 
 	glDrawArrays(GL_TRIANGLES,0,scene_points.size()-BORDER_VERTICES-GUIDE_VERTICES);
@@ -356,7 +356,6 @@ void game::calc_game_state(){
 		new_active_piece();
 	}
 
-
 	//the active game piece (the one that can still fall - last in list)
 	//is moved according to recent user input
 	//having this function be first should mean that the piece
@@ -375,15 +374,10 @@ void game::calc_game_state(){
 	//if any rows are removed, end this function early
 	vector<int> clear_indices;
 	if(clear_rows(clear_indices)){
-		//cout << "AFTER CLEAR#####################################" << endl;
 		print_game_bools();
-		//cout << "################################################" << endl;
 		clean_list();
 		move_down_after_clear(clear_indices);
-		//return;
 	}
-
-
 
 	//at this point, no cubes can fall, and no rows can be removed,
 	//so a new piece needs created
@@ -393,7 +387,7 @@ void game::calc_game_state(){
 		lost = true;
 	}
 
-	//print_game_bools();
+	// print_game_bools();
 
 }
 //######################################################################################
@@ -447,15 +441,6 @@ void game::move_tet(tetromino* move_me){
 
 //######################################################################################
 bool game::clear_rows(vector<int>& clear_indices){
-
-	//when the game finds a row that needs removed, it should add its
-	//row index to this list, then they will all be deleted at once
-	//vector<int> clear_indices;
-
-
-	//I actually need clear_indices to be a parameter now
-
-
 	for(unsigned int row = 0; row < board_state[0].size(); row++){
 		bool delete_row = true;
 		for(unsigned int col = 0; col < board_state.size(); col++){
@@ -472,7 +457,7 @@ bool game::clear_rows(vector<int>& clear_indices){
 		}
 		if(delete_row){
 			clear_indices.push_back(row);
-		}		
+		}
 	}
 
 	//leave and let calc_game_state know that no rows were removed
@@ -493,7 +478,7 @@ bool game::clear_rows(vector<int>& clear_indices){
 		for(list<tetromino*>::iterator it = active_game_pieces.begin();
 			it != active_game_pieces.end();
 			it++){
-			(*it)->kill_cubes(clear_indices[c]);			
+			(*it)->kill_cubes(clear_indices[c]);
 			//cout << "How do pieces know when they are culled?" << endl;
 		}
 
@@ -539,12 +524,12 @@ void game::move_down_after_clear(vector<int>& clear_indices){
 	//number of row clears below them. So some cubes will fall more than others
 	//depending on how convoluted the board state is
 	for(unsigned int c = 0; c < clear_indices.size(); c++){
-		
+
 		//cout << "Clear indices: " << clear_indices[c] << endl;
 		for(list<tetromino*>::iterator it = active_game_pieces.begin();
 			it != active_game_pieces.end();
 			it++){
-			shift_down_one((*it),clear_indices[c]);			
+			shift_down_one((*it),clear_indices[c]);
 		}
 
 	}
@@ -554,7 +539,7 @@ void game::move_down_after_clear(vector<int>& clear_indices){
 
 //######################################################################################
 void game::shift_down_one(tetromino* move_me, int shift_index){
-	
+
 	int rows[TET_SIZE];
 	int cols[TET_SIZE];
 
@@ -587,7 +572,7 @@ void game::shift_down_one(tetromino* move_me, int shift_index){
 	for(unsigned int c = 0; c < TET_SIZE; c++){
 		if(move_me->cube_status[c]){
 			int new_col = move_me->get_cubes()[c].my_indices.column;
-			int new_row = move_me->get_cubes()[c].my_indices.row; 
+			int new_row = move_me->get_cubes()[c].my_indices.row;
 			board_state[new_col][new_row] = true;
 		}
 	}
@@ -600,7 +585,7 @@ bool game::gravity(){
 /*
 	for(std::list<tetromino*>::iterator it = active_game_pieces.begin();
 		it != active_game_pieces.end(); it++){
-		
+
 		if(fall((*it)) && return_me == false){
 			//cout << "FALL RETURNED TRUE" << endl;
 			return_me = true;
@@ -610,7 +595,7 @@ bool game::gravity(){
 	if(fall(active_game_pieces.back())){
 		return_me = true;
 	}
-	return return_me;	
+	return return_me;
 }
 //######################################################################################
 
@@ -634,7 +619,7 @@ bool game::fall(tetromino* move_me){
 
 	//all of these flags need to be made true in order for this piece to fall
 	bool box_good[TET_SIZE] = {false,false,false,false};
-	
+
 	for(unsigned int c = 0; c < TET_SIZE;c++){
 
 		//if this cube is dead, make its bool true immediately, but
@@ -1095,7 +1080,7 @@ void game::move_piece_left(tetromino* move_me){
 				if(move_me->get_cubes()[d].my_indices.row == row &&
 				   move_me->get_cubes()[d].my_indices.column > col){
 					box_good[d] = true;
-				} 
+				}
 
 			}
 		}
@@ -1111,7 +1096,7 @@ void game::move_piece_left(tetromino* move_me){
 				board_state[col][row]   = false;
 				move_me->get_cubes()[c].my_indices.column -= 1;
 				move_me->get_cubes()[c].set_center_pt(center_points[col-1][row]);
-				
+
 			}
 		}
 		//set all of their current positions true at once
@@ -1167,7 +1152,7 @@ void game::move_piece_right(tetromino* move_me){
 				if(move_me->get_cubes()[d].my_indices.row == row &&
 				   move_me->get_cubes()[d].my_indices.column < col){
 					box_good[d] = true;
-				} 
+				}
 
 			}
 		}
