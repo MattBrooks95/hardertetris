@@ -209,7 +209,6 @@ void glut_handler::handle_resize(int width_in, int height_in){
 
 //######################################################################################
 void glut_handler::timerfunc(int value){
-
 	glut_access->ticks++;
 
 	static int context_switch_seconds = DEFAULT_CONTEXT_SWITCH;
@@ -248,8 +247,7 @@ void glut_handler::timerfunc(int value){
 						exit(-1);
 				}
 				strange_view = true;
-				context_switch_seconds = 3;//go back to normal after 5 seconds
-				//context_switch_seconds = 20;//to test contexts
+				context_switch_seconds = 6;//go back to normal after n seconds
 			} else {
 				strange_view = false;
 				gaze_access->normal_view();

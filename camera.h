@@ -42,7 +42,6 @@ class camera{
 	unsigned int get_view(){ return true;}
 
   private:
-
 	//! keep track of which view the user is currently experiencing
 	/*! 1 = right side view
 	 *  2 = left side view
