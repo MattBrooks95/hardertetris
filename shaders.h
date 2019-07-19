@@ -31,7 +31,7 @@ class shaders{
 	//! this function takes a list of shader file names and fills shader_list
 	void init_shaders(const std::vector<shader_request>& file_names);
 
-	//! this function is a helper for the init_shaders member	
+	//! this function is a helper for the init_shaders member
 	void init_shaders_source(const shader_request& file_name);
 
 	//! compile the shaders on the gpu
@@ -68,7 +68,7 @@ class shaders{
   private:
 
 	//! save the index reference to this program
-	GLuint program;  
+	GLuint program;
 
 	//! save index reference to location vertices
 	GLint v_pos_loc;
@@ -76,9 +76,9 @@ class shaders{
 	//! save index reference to color vertices
 	GLint gpu_color;
 
-	//! save the indiex for shader argument model view
+	//! save the index for shader argument model view
 	GLint model_view;
-	
+
 	//! save the index for shader argument camera view
 	GLint camera_view;
 

@@ -349,8 +349,6 @@ void game::calc_game_state(){
 	//so long as the user keeps moving it
 	move_tet(active_game_pieces.back());
 
-	return;//remove - trying to make piece freeze until i get it drawing
-
 	//have the pieces fall until they can fall no more
 	//this function returns true if any falling was done,
 	//and this function ends
@@ -752,8 +750,8 @@ void game::print_positions(){
 //######################################################################################
 bool game::new_active_piece(){
 	//need to be able to randomly select between 7 different pieces
-	// int random_number = rand() % 7;
-	int random_number = 6; //line for testing only a particular piece
+	int random_number = rand() % 7;
+	// int random_number = 6; //line for testing only a particular piece
 
 	//color to make the next piece, fill in switch case
 	string color;

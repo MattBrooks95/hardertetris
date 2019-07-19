@@ -56,6 +56,3 @@ class cube{
 	//! store array of colors
 	std::vector<glm::vec4> my_colors;
 };
-
-
-

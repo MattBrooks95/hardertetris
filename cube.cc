@@ -52,7 +52,6 @@ void cube::init(const string& color,const glm::vec3& my_location,
     int total_size = sizeof(glm::vec4) * (my_points.size() + my_colors.size());
 	glBufferData(GL_ARRAY_BUFFER,total_size,NULL, GL_STATIC_DRAW);
 
-
     //send over the points
     glBufferSubData(GL_ARRAY_BUFFER,0,sizeof(glm::vec4) * my_points.size(),my_points.data());
 
@@ -73,11 +72,15 @@ void cube::init(const string& color,const glm::vec3& my_location,
 
 //######################################################################################
 void cube::set_center_pt(const glm::vec3& location){
-
 	center_pt = location;
 
-	my_model_view = glm::translate(glm::mat4(),center_pt);
+	//I guess the OpenGL spec changed, so this code just caused the matrix
+	// to be full of 0's, because the default mat4 is an all 0 matrix and not
+	// the identity as it was when I made this project
+	//THANK YOU https://community.khronos.org/t/glm-translate/75326
 
+	// my_model_view = glm::translate(glm::mat4(),center_pt);
+	my_model_view = glm::translate(glm::mat4(1),center_pt);
 }
 //######################################################################################
 
@@ -192,6 +195,8 @@ void cube::draw_me(){
 	//move vertices to simulate the camera being at eye, and looking at looking, with respect to current up
 	glm::mat4 pass_cam_view = glm::lookAt(gaze_access->get_eye(),gaze_access->get_looking(),gaze_access->get_up());
 	glUniformMatrix4fv(shader_access->get_cam_view(),1,GL_FALSE,&pass_cam_view[0][0]);
+
+	// std::cout << glm::to_string(my_model_view) << std::endl;
 
 	//move vertices relative to the model view
 	glUniformMatrix4fv(shader_access->get_model_view(),1,GL_FALSE,&my_model_view[0][0]);

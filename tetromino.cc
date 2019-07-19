@@ -56,14 +56,12 @@ void tetromino::init(const string& color, const tet_request* cube_locs){
 
 //######################################################################################
 void tetromino::draw_me(){
-
 	for(unsigned int c = 0; c < TET_SIZE; c++){
 		if(cube_status[c]){
 			my_cubes[c].draw_me();
 			cout << "Center point:" << my_cubes[c].get_center_point() << endl;
 		}
 	}
-
 }
 //######################################################################################
 
