@@ -51,7 +51,6 @@ void tetromino::init(const string& color, const tet_request* cube_locs){
 	my_cubes[1].init(color,game_access->get_game_locs()[column2][row2],cube_locs->cubes[1]);
 	my_cubes[2].init(color,game_access->get_game_locs()[column3][row3],cube_locs->cubes[2]);
 	my_cubes[3].init(color,game_access->get_game_locs()[column4][row4],cube_locs->cubes[3]);
-
 }
 //######################################################################################
 
@@ -61,6 +60,7 @@ void tetromino::draw_me(){
 	for(unsigned int c = 0; c < TET_SIZE; c++){
 		if(cube_status[c]){
 			my_cubes[c].draw_me();
+			cout << "Center point:" << my_cubes[c].get_center_point() << endl;
 		}
 	}
 
@@ -164,7 +164,7 @@ bool t_block::rot_left(){
 				exit(-1);
 		}
 		reactivate_cubes();
-		down_pos();	
+		down_pos();
 		return true;
 	}
 	reactivate_cubes();
@@ -364,7 +364,7 @@ bool t_block::check_right(){
 		default:
 			break;
 	}
-	
+
 	switch(position){
 		case 0: //0 to 1
 			if(board[cols[2]+1][rows[2]-1]) return false;
@@ -431,7 +431,7 @@ bool l_z_block::rot_left(){
 				my_cubes[0].my_indices.column += 1;
 				my_cubes[0].my_indices.row    += 1;
 				my_cubes[3].my_indices.column -= 1;
-				my_cubes[3].my_indices.row    += 1;	
+				my_cubes[3].my_indices.row    += 1;
 				break;
 			default:
 				cout << "Illegal position in rot_left." << endl;
@@ -471,7 +471,7 @@ bool l_z_block::rot_right(){
 				my_cubes[0].my_indices.column -= 1;
 				my_cubes[0].my_indices.row    -= 1;
 				my_cubes[3].my_indices.column += 1;
-				my_cubes[3].my_indices.row    -= 1;	
+				my_cubes[3].my_indices.row    -= 1;
 				break;
 			case 3: //3 to 0
 				my_cubes[2].my_indices.row    -= 2;
@@ -902,7 +902,7 @@ bool r_z_block::check_right(){
 			if(board[cols[3]-1][rows[3]-1]) return false;
 			break;
 	}
-	
+
 
 	return true;
 }
@@ -954,7 +954,7 @@ bool I_block::rot_left(){
 		reactivate_cubes();
 		down_pos();
 		return true;
-		
+
 	}
 	reactivate_cubes();
 	return false;
@@ -984,7 +984,7 @@ bool I_block::rot_right(){
 				break;
 			case 2: //2 to 3
 				my_cubes[1].my_indices.column -= 2;
-				my_cubes[1].my_indices.row    += 1;	
+				my_cubes[1].my_indices.row    += 1;
 				my_cubes[0].my_indices.column -= 1;
 				my_cubes[2].my_indices.row    -= 1;
 				my_cubes[3].my_indices.column += 1;
@@ -1066,7 +1066,7 @@ bool I_block::check_left(){
 			if(cols[0] < 2 || cols[0] > board.size() - 2){
 				//cout << "\n\n\n\n\n" << endl;
 				return false; //will hit right or left sides of board
-			} 
+			}
 			break;
 		case 2: //2 to 1 -> don't need to check sides of board
 			if(rows[0] < 2 || rows[0] > board[0].size() - 2){
@@ -1145,7 +1145,7 @@ bool I_block::check_right(){
 			if(cols[0] < 3 || cols[0] > (int) board.size() - 2){
 				//cout << "\n\n\n\n\n" << endl;
 				return false; //will hit right or left sides of board
-			} 
+			}
 			break;
 		case 2:  //2 to 3 -> don't need to check sides of board
 			if(rows[0] < 2 || rows[0] > (int) board[0].size() - 2){
@@ -1252,7 +1252,7 @@ bool l_l_block::rot_left(){
 //######################################################################################
 bool l_l_block::rot_right(){
 
-	
+
 	deactivate_cubes();
 	if(check_right()){
 		switch(position){
@@ -1481,7 +1481,7 @@ bool r_l_block::rot_left(){
 				my_cubes[1].my_indices.column += 1;
 				my_cubes[1].my_indices.row    += 1;
 				my_cubes[3].my_indices.column -= 1;
-				my_cubes[3].my_indices.row    -= 1;	
+				my_cubes[3].my_indices.row    -= 1;
 				break;
 			case 3: //3 to 2
 				my_cubes[0].my_indices.row    += 2;
@@ -1520,7 +1520,7 @@ bool r_l_block::rot_right(){
 				my_cubes[1].my_indices.column -= 1;
 				my_cubes[1].my_indices.row    -= 1;
 				my_cubes[3].my_indices.column += 1;
-				my_cubes[3].my_indices.row    += 1;				
+				my_cubes[3].my_indices.row    += 1;
 				break;
 			case 2: //2 to 3
 				my_cubes[0].my_indices.row    -= 2;
@@ -1559,7 +1559,7 @@ void r_l_block::deactivate_cubes(){
 	for(unsigned int c = 0; c < TET_SIZE;c++){
 		col = my_cubes[c].my_indices.column;
 		row = my_cubes[c].my_indices.row;
-		game_access->get_board_state()[col][row] = false;		
+		game_access->get_board_state()[col][row] = false;
 	}
 }
 //######################################################################################
@@ -1574,7 +1574,7 @@ void r_l_block::reactivate_cubes(){
 	for(unsigned int c = 0; c < TET_SIZE;c++){
 		col = my_cubes[c].my_indices.column;
 		row = my_cubes[c].my_indices.row;
-		game_access->get_board_state()[col][row] = true;		
+		game_access->get_board_state()[col][row] = true;
 		my_cubes[c].set_center_pt(game_access->get_game_locs()[col][row]);
 	}
 }
@@ -1659,7 +1659,7 @@ bool r_l_block::check_right(){
 			rows[c] = my_cubes[c].my_indices.row;
 		}
 	}
-	
+
 	switch(position){
 		case 0: //0 to 1 -> need only check bottom
 			if(rows[1]+1 > (int)board[0].size() - 1) return false;
@@ -1677,7 +1677,7 @@ bool r_l_block::check_right(){
 			cout << "Illegal position in rot_left." << endl;
 			exit(-1);
 	}
-	
+
 	switch(position){
 		case 0: //0 to 1
 			if(board[cols[0]][rows[0]+2])   return false;

@@ -47,9 +47,15 @@ glut_handler::glut_handler(int& argc, char* argv[]){
 	//set up the timer func to allow consistent FPS
 	glutTimerFunc(TIME_PER_FRAME, timerfunc, 0);   //Dr. Chelberg's animate.cc used as reference
 
+	glewExperimental = GL_TRUE;
 	//why was this required to run? It would cause InitShader or any function
 	//that had remotely anything to do with the gpu to seg fault w/o an error code or anything
-	glewInit();
+	GLenum error = glewInit();
+
+	if(GLEW_OK != error){
+		fprintf(stderr, "Error: %s\n", glewGetErrorString(error));
+		cout << "GLEW issue! Exiting." << endl;
+	}
 
 	ticks = 0;//start the timer off at zero
 

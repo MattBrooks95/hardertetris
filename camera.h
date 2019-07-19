@@ -1,10 +1,10 @@
 //! \file camera.h describes the class that stores the camera's info
 #pragma once
 
-#include<glm/glm.hpp>
-
+#include <glm/glm.hpp>
 
 #define CAM_START  -5.0, 10.0, 30.0
+
 //#define CAM_START  0.0, 0.0, 1.0
 #define LOOK_START -5.0, 10.0,  -1.0
 //#define LOOK_START 0.0, 0.0,  0.0

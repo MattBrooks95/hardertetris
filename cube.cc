@@ -23,7 +23,6 @@ cube::cube(){
 //######################################################################################
 void cube::init(const string& color,const glm::vec3& my_location,
 				const array_indices& indices_in){
-
 	//save the logical location for this cube in the game
 	my_indices = indices_in;
 
@@ -81,6 +80,10 @@ void cube::set_center_pt(const glm::vec3& location){
 
 }
 //######################################################################################
+
+string cube::get_center_point(){
+	return to_string(center_pt.x) + " " + to_string(center_pt.y) + " " + to_string(center_pt.z);
+}
 
 //######################################################################################
 void cube::build_vertices(){
@@ -183,7 +186,6 @@ void cube::make_colors(const string& color){
 
 //######################################################################################
 void cube::draw_me(){
-
 	//bind this cube's vertex array object
 	glBindVertexArray(my_vao);
 
@@ -205,8 +207,7 @@ void cube::draw_me(){
 
 	glEnable(GL_DEPTH_TEST);
 
-	// glDrawArrays(GL_TRIANGLES,0,my_points.size());
-	glDrawArrays(GL_POINTS,0,my_points.size());
-
+	glDrawArrays(GL_TRIANGLES,0,my_points.size());
+	// glDrawArrays(GL_POINTS,0,my_points.size());
 }
 //######################################################################################

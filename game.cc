@@ -289,7 +289,6 @@ void game::build_board_vertices(){
 
 //######################################################################################
 void game::draw_scene(){
-
 	//bind this cube's vertex array object
 	glBindVertexArray(my_vao);
 
@@ -322,18 +321,15 @@ void game::draw_scene(){
 
 //######################################################################################
 void game::draw_cubes(){
-
 	for(std::list<tetromino*>::iterator it = active_game_pieces.begin();
 		it != active_game_pieces.end(); ++it){
 		(*it)->draw_me();
 	}
-
 }
 //######################################################################################
 
 //######################################################################################
 void game::calc_game_state(){
-
 	if(paused){
 		return;
 	}
@@ -352,6 +348,8 @@ void game::calc_game_state(){
 	//can move after it has touched a surface that could stop it,
 	//so long as the user keeps moving it
 	move_tet(active_game_pieces.back());
+
+	return;//remove - trying to make piece freeze until i get it drawing
 
 	//have the pieces fall until they can fall no more
 	//this function returns true if any falling was done,
@@ -753,10 +751,9 @@ void game::print_positions(){
 
 //######################################################################################
 bool game::new_active_piece(){
-
 	//need to be able to randomly select between 7 different pieces
-	int random_number = rand() % 7;
-	//int random_number = 6; //line for testing only a particular piece
+	// int random_number = rand() % 7;
+	int random_number = 6; //line for testing only a particular piece
 
 	//color to make the next piece, fill in switch case
 	string color;
@@ -766,7 +763,6 @@ bool game::new_active_piece(){
 
 	//locations to give that piece, fill in switch case
 	switch(random_number){
-
 		case t_tet:
 			color = "purple";
 			set_tet_loc(new_tet_loc,"t_block");

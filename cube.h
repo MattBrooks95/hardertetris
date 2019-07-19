@@ -32,6 +32,8 @@ class cube{
 	//! draw this cube when commanded
 	void draw_me();
 
+	std::string get_center_point();
+
 	//! keep track of there this cube's boolean is in the game state boolean array
 	array_indices my_indices;
 
@@ -41,10 +43,9 @@ class cube{
 
 	//! store index to buffer that can send data to gpu
 	GLuint my_buffer;
-	
+
 	//! keep track of where this thing's center point is
 	glm::vec3 center_pt;
-
 
 	//! model view matrix made up of any scaling and translation to center point
 	glm::mat4 my_model_view;

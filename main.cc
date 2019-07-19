@@ -1,9 +1,9 @@
 //! \file main.cc implements the structure of a game of HarderTetris
 
 //useful includes
-#include<iostream>
-#include<chrono>
-#include<cstdlib>
+#include <iostream>
+#include <chrono>
+#include <cstdlib>
 
 //my includes
 #include "glut_handler.h"
