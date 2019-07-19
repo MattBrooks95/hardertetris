@@ -2,14 +2,14 @@
 
 #pragma once
 #define GLM_ENABLE_EXPERIMENTAL
-#include<glm/glm.hpp>   //matrix and vector types
-#include<glm/gtx/string_cast.hpp>  //easy printing of vectors and matrices
-#include<vector>
-#include<list>
-#include<queue>
-#include<iostream>
+#include <glm/glm.hpp>   //matrix and vector types
+#include <glm/gtx/string_cast.hpp>  //easy printing of vectors and matrices
+#include <vector>
+#include <list>
+#include <queue>
+#include <iostream>
 
-#include<cstdlib>
+#include <cstdlib>
 
 #include "tetromino.h"
 #include "c_tuples.h"
