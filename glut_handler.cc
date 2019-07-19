@@ -227,7 +227,6 @@ void glut_handler::timerfunc(int value){
 				//int random_number = 0;
 				//cout << "CONTEXT SWITCH RAND: " << random_number << endl;
 				switch(random_number){
-
 					case 0:
 						gaze_access->right_side_view();
 						break;
@@ -255,7 +254,6 @@ void glut_handler::timerfunc(int value){
 			}
 		}
 	}
-
 
 	//update the object's locations
 	//game_access->calc_game_state();
