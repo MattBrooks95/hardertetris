@@ -11,7 +11,6 @@
 #include "game.h"
 #include "camera.h"
 
-
 using namespace std;
 
 //make sure the glut_handler can be accessed by all objects that need it
@@ -28,7 +27,7 @@ game* game_access;
 //global access to the camera class
 camera* gaze_access;
 
-//######################################################################################
+//##############################################################################
 int main(int argc, char *argv[]){
 
 	//set up the glut handling class
@@ -53,7 +52,7 @@ int main(int argc, char *argv[]){
 	game_access = &tetris;
 	game_access->make_scene();
 
-	//tetris.print_game_bools();
+	// tetris.print_game_bools();
 	//tetris.print_positions();
 	//############################################################
 

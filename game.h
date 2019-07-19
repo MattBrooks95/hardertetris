@@ -189,7 +189,3 @@ class game{
 	//! toggle to true when the player loses the game
 	bool lost;
 };
-
-
-
-

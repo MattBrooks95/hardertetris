@@ -24,7 +24,7 @@ glut_handler::glut_handler(int& argc, char* argv[]){
 
 	//tell glut where to put the window, and how big it should be
 	glutInitWindowPosition(window_info.x, window_info.y);
-	glutInitWindowSize(window_info.w,window_info.h);
+	glutInitWindowSize(window_info.w, window_info.h);
 
 	string window_arg = WINDOW_CAPTION;
 	glutCreateWindow(window_arg.c_str());
@@ -60,14 +60,16 @@ glut_handler::glut_handler(int& argc, char* argv[]){
 void glut_handler::display(){
 
 	glClearColor(CLEAR_COLOR);
-  	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);      //clear the window
+	//clear the window
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);
 
 	game_access->draw_scene();
 	game_access->draw_cubes();
-
-	glutSwapBuffers();		   //swap the buffers
+	game_access->print_game_bools();
+	//swap the buffers
+	glutSwapBuffers();
 	glFlush();
 }
 //######################################################################################
@@ -76,54 +78,48 @@ void glut_handler::display(){
 void glut_handler::handle_key(unsigned char key, int x, int y){
 
 	switch(key){
-	
+
 	  case ESCAPE:
 		exit(EXIT_SUCCESS);  //exit the program
 		break;
 
 	  case 'w':
 	  case 'W':
-		//std::cout << "You hit w" << std::endl;
 		game_access->move_list.push(fast_drop);
 		break;
 
 	  case 's':
 	  case 'S':
-		//std::cout << "You hit s" << std::endl;
 		game_access->move_list.push(medium_drop);
 		break;
 
 	  case 'a':
 	  case 'A':
-		//std::cout << "You hit a" << std::endl;
+
 		game_access->move_list.push(move_left);
 		break;
 
 	  case 'd':
 	  case 'D':
-		//std::cout << "You hit d" << std::endl;
 		game_access->move_list.push(move_right);
 		break;
 
       case 'e':
       case 'E':
-        //std::cout << "You hit e" << std::endl; 
 		game_access->move_list.push(rot_right);
         break;
 
 	  case 'q':
 	  case 'Q':
-		//std::cout << "You hit q" << endl;
 		game_access->move_list.push(rot_left);
 		break;
 
 	  case 'r':
 	  case 'R':
-		//std::cout << "You hit R" << std::endl;
-		//std::cout << "Reverting Screen size." << std::endl;
+
 		handle_resize(ORIG_WIDTH,ORIG_HEIGHT);
 		glutReshapeWindow(ORIG_WIDTH,ORIG_HEIGHT);
-		break;	  
+		break;
 
 	  case 'p':
 	  case 'P':
@@ -136,18 +132,15 @@ void glut_handler::handle_key(unsigned char key, int x, int y){
 
 	}
 
-
 }
 //######################################################################################
 
 //######################################################################################
 void glut_handler::handle_other_keys(int key, int x, int y){
-	//cout << "HIT A SPECIAL KEY" << endl;
-	//char junk; cin >> junk;
 	switch(key){
 
 		case GLUT_KEY_UP:
-			handle_key('w',x,y);			
+			handle_key('w',x,y);
 			break;
 
 		case GLUT_KEY_DOWN:
@@ -179,9 +172,6 @@ void glut_handler::handle_mouse(int button, int state, int x, int y){
 	static bool do_we_care = true;
 
 	if(state == 0 && do_we_care){
-
-		//std::cout << "MOUSE EVENT:\n" << "Button: " << button << "\nState: " << state
-		//          << "\nX coord: " << x << "\nY coord: " << y << std::endl;
 
 		if(button == 0){
 		} else if(button == 2){
@@ -219,7 +209,6 @@ void glut_handler::timerfunc(int value){
 	static int context_switch_seconds = DEFAULT_CONTEXT_SWITCH;
 	static bool strange_view = false;
 
-
 	//log passage of time in seconds
 	if(glut_access->ticks % TICKS_PER_SEC == 0 ){
 		int seconds = glut_access->ticks / TICKS_PER_SEC;
@@ -227,7 +216,7 @@ void glut_handler::timerfunc(int value){
 		//decrement the time until next context switch
 		if(!game_access->paused) context_switch_seconds--;
 
-		if( context_switch_seconds == 0){
+		if(context_switch_seconds == 0){
 			if(!strange_view){
 				int random_number = rand() % 4;
 				//int random_number = 0;

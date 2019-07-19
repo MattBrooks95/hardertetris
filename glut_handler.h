@@ -18,7 +18,7 @@
 #define WINDOW_DEFAULT {0,0,1000,1000}
 //#define WINDOW_DEFAULT {0,0,1920,1080}
 
-#define DEFAULT_CONTEXT_SWITCH 20
+#define DEFAULT_CONTEXT_SWITCH 12
 
 
 #define ORIG_WIDTH 1000
@@ -26,10 +26,6 @@
 #define WINDOW_CAPTION "Harder Tetris"
 #define TIME_PER_FRAME 16  //animate.cc's time keeping statements used here - about 60 fps
 #define TICKS_PER_SEC 60
-//#define TIME_PER_FRAME 96
-//#define TICKS_PER_SEC 10
-//#define TIME_PER_FRAME 192
-//#define TICKS_PER_SEC 5
 
 #define ESCAPE 27   //macro to make ESCAPE case in switch statement more readable
 

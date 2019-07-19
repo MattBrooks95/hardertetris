@@ -104,11 +104,9 @@ void game::make_scene(){
 	//make the lines for the game board
 	build_board_vertices();
 
-
 	//send data to gpu
     int total_size = sizeof(vec4) * (scene_points.size() + scene_colors.size());
 	glBufferData(GL_ARRAY_BUFFER,total_size,NULL, GL_STATIC_DRAW);
-
 
     //send over the points
     glBufferSubData(GL_ARRAY_BUFFER,0,sizeof(vec4) * scene_points.size(),scene_points.data());
@@ -124,7 +122,7 @@ void game::make_scene(){
 
 	glEnableVertexAttribArray(shader_access->get_gpu_color());
 	glVertexAttribPointer(shader_access->get_gpu_color(),4,GL_FLOAT,GL_FALSE,0,
-						(GLvoid*)(sizeof(vec4) * scene_colors.size())  );
+						(GLvoid*)(sizeof(vec4) * scene_colors.size()));
 
 }
 //######################################################################################
@@ -288,14 +286,6 @@ void game::build_board_vertices(){
 	}
 
 }
-/*
-void game::make_tet(const string& color, const tet_request& tet){
-	tetromino* new_tet = new tetromino(color,tet);
-	active_game_pieces.push_back(new_tet);
-	//active_game_pieces.push_back(tetromino(color,tet));
-
-}
-*/
 
 //######################################################################################
 void game::draw_scene(){
@@ -334,7 +324,7 @@ void game::draw_scene(){
 void game::draw_cubes(){
 
 	for(std::list<tetromino*>::iterator it = active_game_pieces.begin();
-		it != active_game_pieces.end(); it++){
+		it != active_game_pieces.end(); ++it){
 		(*it)->draw_me();
 	}
 
@@ -349,10 +339,10 @@ void game::calc_game_state(){
 	}
 
 	if(lost){
-		//cout << "You have lost. Exiting." << endl;
 		exit(EXIT_SUCCESS);
 	}
-	if(active_game_pieces.size() == 0){
+
+	if(active_game_pieces.empty()){
 		new_active_piece();
 	}
 
@@ -401,7 +391,7 @@ void game::move_tet(tetromino* move_me){
 	}
 
 	//leave if there is no active piece
-	if(active_game_pieces.size() == 0){
+	if(active_game_pieces.empty()){
 		return;
 	}
 
@@ -477,7 +467,7 @@ bool game::clear_rows(vector<int>& clear_indices){
 
 		for(list<tetromino*>::iterator it = active_game_pieces.begin();
 			it != active_game_pieces.end();
-			it++){
+			++it){
 			(*it)->kill_cubes(clear_indices[c]);
 			//cout << "How do pieces know when they are culled?" << endl;
 		}
@@ -502,7 +492,7 @@ void game::clean_list(){
 			it= active_game_pieces.erase(it);
 		} else {
 			//cout << "Not killed: " << *it << endl;
-			it++;
+			++it;
 		}
 	}
 	//cout << "LIST SIZE AFTER: " << active_game_pieces.size();
@@ -528,7 +518,7 @@ void game::move_down_after_clear(vector<int>& clear_indices){
 		//cout << "Clear indices: " << clear_indices[c] << endl;
 		for(list<tetromino*>::iterator it = active_game_pieces.begin();
 			it != active_game_pieces.end();
-			it++){
+			++it){
 			shift_down_one((*it),clear_indices[c]);
 		}
 
@@ -582,16 +572,7 @@ void game::shift_down_one(tetromino* move_me, int shift_index){
 //######################################################################################
 bool game::gravity(){
 	bool return_me = false;
-/*
-	for(std::list<tetromino*>::iterator it = active_game_pieces.begin();
-		it != active_game_pieces.end(); it++){
 
-		if(fall((*it)) && return_me == false){
-			//cout << "FALL RETURNED TRUE" << endl;
-			return_me = true;
-		}
-	}
-*/
 	if(fall(active_game_pieces.back())){
 		return_me = true;
 	}
@@ -689,7 +670,6 @@ bool game::fall(tetromino* move_me){
 			move_me->get_cubes()[3].my_indices.row += 1;
 		}
 
-
 		//make all of their new positions true
 		if(move_me->cube_status[0]){
 			board_state[move_me->get_cubes()[0].my_indices.column][move_me->get_cubes()[0].my_indices.row] = true;
@@ -739,7 +719,6 @@ bool game::fall(tetromino* move_me){
 //######################################################################################
 void game::print_game_bools(){
 
-	//cout << "########### GAME BOARD BOOLEANS ############" << endl;
 	if(board_state.size() == 0) return;
 
 	for(unsigned int row = 0; row < board_state[0].size(); row++){
@@ -748,7 +727,10 @@ void game::print_game_bools(){
 		}
 		cout << endl;
 	}
-	//cout << "###########################################" << endl;
+
+	string separator = "###########################################";
+
+	cout << separator << endl;
 
 }
 //######################################################################################
@@ -756,7 +738,6 @@ void game::print_game_bools(){
 //######################################################################################
 void game::print_positions(){
 
-	//cout << "############# GAME BOARD LOCATIONS ##############" << endl;
 	if(center_points.size() == 0) return;
 
 	for(unsigned int col = 0; col < center_points.size(); col++){
@@ -766,8 +747,6 @@ void game::print_positions(){
 
 		}
 	}
-
-	//cout << "#################################################" << endl;
 
 }
 //######################################################################################
@@ -789,7 +768,6 @@ bool game::new_active_piece(){
 	switch(random_number){
 
 		case t_tet:
-			//cout << "Making a T block." << endl;
 			color = "purple";
 			set_tet_loc(new_tet_loc,"t_block");
 			if(can_make_piece(new_tet_loc)){
@@ -808,7 +786,6 @@ bool game::new_active_piece(){
 			break;
 
 		case l_z_tet:
-			//cout << "Making a left z block." << endl;
 			color = "red";
 			set_tet_loc(new_tet_loc,"l_z_block");
 			if(can_make_piece(new_tet_loc)){
@@ -828,7 +805,7 @@ bool game::new_active_piece(){
 			break;
 
 		case r_z_tet:
-			//cout << "Making a right z block." << endl;
+
 			color = "green";
 			set_tet_loc(new_tet_loc,"r_z_block");
 			if(can_make_piece(new_tet_loc)){
@@ -841,13 +818,12 @@ bool game::new_active_piece(){
 				return true;
 
 			} else {
-
 				return false;
 			}
 			break;
 
 		case I_tet:
-			//cout << "Making an I block." << endl;
+
 			color = "blue_green";
 			set_tet_loc(new_tet_loc,"I_block");
 			if(can_make_piece(new_tet_loc)){
@@ -858,9 +834,7 @@ bool game::new_active_piece(){
 				delete new_tet_loc;
 				new_tetromino = NULL;
 				return true;
-
 			} else {
-
 				return false;
 
 			}

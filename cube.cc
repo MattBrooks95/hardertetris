@@ -15,10 +15,8 @@ extern camera* gaze_access;
 
 //######################################################################################
 cube::cube(){
-
 	my_vao    = 0;
-	my_buffer = 0;	
-
+	my_buffer = 0;
 }
 //######################################################################################
 
@@ -150,8 +148,6 @@ void cube::build_vertices(){
 
 //######################################################################################
 void cube::make_colors(const string& color){
-
-
 	glm::vec4 base_color;
 
     //note these colors are defined in colors.h
@@ -179,11 +175,9 @@ void cube::make_colors(const string& color){
         exit(-1);
     }
 
-
 	for(unsigned int c = 0; c < my_points.size();c++){
 		my_colors.push_back(base_color);
 	}
-
 }
 //######################################################################################
 
@@ -192,7 +186,6 @@ void cube::draw_me(){
 
 	//bind this cube's vertex array object
 	glBindVertexArray(my_vao);
-
 
 	//move vertices to simulate the camera being at eye, and looking at looking, with respect to current up
 	glm::mat4 pass_cam_view = glm::lookAt(gaze_access->get_eye(),gaze_access->get_looking(),gaze_access->get_up());
@@ -212,14 +205,8 @@ void cube::draw_me(){
 
 	glEnable(GL_DEPTH_TEST);
 
-	glDrawArrays(GL_TRIANGLES,0,my_points.size());
-	//glDrawArrays(GL_POINTS,0,my_points.size());
+	// glDrawArrays(GL_TRIANGLES,0,my_points.size());
+	glDrawArrays(GL_POINTS,0,my_points.size());
 
 }
 //######################################################################################
-
-
-
-
-
-

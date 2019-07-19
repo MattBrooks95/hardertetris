@@ -8,8 +8,10 @@ class tetromino{
   public:
 	//! constructor just zeros out most of the fields for this class
 	tetromino();
+
 	//! copy constructor copies boolean arrays and most fields for this class
 	tetromino(const tetromino& other);
+
 	//~tetromino();
 
 	//! this function sets up the tetrimono according to the arguments
@@ -21,15 +23,20 @@ class tetromino{
 	//! this function can be overloaded and rotates this tetromino clockwise
 	/*! it should be overloaded, keeps track of the current rotation state*/
 	virtual bool rot_left() = 0;
+
 	//! this function can to be overloaded and rotates this tetrominio counterclockwise
 	/*! it should be overloaded, keeps track of the current rotation state*/
 	virtual bool rot_right() = 0;
+
 	//! helper to see if left rotation can be done
 	virtual bool check_left() = 0;
+
 	//helper to see if right rotation can be done
 	virtual bool check_right() = 0;
+
 	//! this function turns the current location's values in the game state to false
 	virtual void deactivate_cubes() = 0;
+
 	//! this function turns the current location's values in the game state to true
 	virtual void reactivate_cubes() = 0;
 
@@ -66,17 +73,16 @@ class tetromino{
 class t_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -86,17 +92,17 @@ class t_block : public tetromino{
 class l_z_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
+
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -106,17 +112,16 @@ class l_z_block : public tetromino{
 class r_z_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -125,17 +130,17 @@ class r_z_block : public tetromino{
 //! inherit from tetromino, implement rotations for this piece
 class I_block : public tetromino{
   public:
-	//! overload rot_left() for this piece
+
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -145,17 +150,17 @@ class I_block : public tetromino{
 class l_l_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
+
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -165,17 +170,17 @@ class l_l_block : public tetromino{
 class r_l_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
+
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 
@@ -185,17 +190,17 @@ class r_l_block : public tetromino{
 class square_block : public tetromino{
 
   public:
-	//! overload rot_left() for this piece
+
 	bool rot_left();
-	//! overload rot_right() for this piece
+
 	bool rot_right();
-	//! overload function to turn old location's boolean value to false
+
 	void deactivate_cubes();
-	//! overload function to turn new location's boolean value to true
+
 	void reactivate_cubes();
-	//! helper function to check to see if a left rotation can be done
+
 	bool check_left();
-	//! helper function to theck to see if a right rotation can be done
+
 	bool check_right();
   private:
 

@@ -30,6 +30,9 @@ camera.o: camera.cc camera.h
 string+.o: string+.cc string+.h
 	g++ -c $(C_FLGS) string+.cc
 
+gdb:
+	g++ -g -o debug $(C_FLGS) *.cc $(LINKS)
+
 tar:
 	tar -cvzf harder_tetris.tar.gz ./*
 
