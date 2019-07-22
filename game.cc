@@ -567,12 +567,12 @@ void game::shift_down_one(tetromino* move_me, int shift_index){
 
 //######################################################################################
 bool game::gravity(){
-	bool return_me = false;
+	bool can_move_down = false;
 
 	if(fall(active_game_pieces.back())){
-		return_me = true;
+		can_move_down = true;
 	}
-	return return_me;
+	return can_move_down;
 }
 //######################################################################################
 
@@ -613,7 +613,7 @@ bool game::fall(tetromino* move_me){
 
 		//if this box is on the bottom of the board, it can't fall, and neither can any of the other
 		//cubes in this piece
-		if( (move_me->get_cubes()[c].my_indices.row) == board_rows-1){
+		if(move_me->get_cubes()[c].my_indices.row == (board_rows-1)){
 			return false;
 		}
 
@@ -622,7 +622,7 @@ bool game::fall(tetromino* move_me){
 
 		//if the box directly below this cube is occupied, this cube seemingly (for now)
 		//can't fall
-		if(board_state[this_cube_col][this_cube_row+1]){
+		if(board_state[this_cube_col][this_cube_row + 1]){
 
 			//go to next phase of outer loop
 			continue;
@@ -714,7 +714,6 @@ bool game::fall(tetromino* move_me){
 
 //######################################################################################
 void game::print_game_bools(){
-
 	if(board_state.size() == 0) return;
 
 	for(unsigned int row = 0; row < board_state[0].size(); row++){
@@ -727,13 +726,11 @@ void game::print_game_bools(){
 	string separator = "###########################################";
 
 	cout << separator << endl;
-
 }
 //######################################################################################
 
 //######################################################################################
 void game::print_positions(){
-
 	if(center_points.size() == 0) return;
 
 	for(unsigned int col = 0; col < center_points.size(); col++){
@@ -743,7 +740,6 @@ void game::print_positions(){
 
 		}
 	}
-
 }
 //######################################################################################
 

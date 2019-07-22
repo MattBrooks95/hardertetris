@@ -27,7 +27,6 @@ game* game_access;
 //global access to the camera class
 camera* gaze_access;
 
-//##############################################################################
 int main(int argc, char *argv[]){
 
 	//set up the glut handling class
@@ -72,4 +71,3 @@ int main(int argc, char *argv[]){
 
     return EXIT_SUCCESS;//exit with success
 }
-//######################################################################################
