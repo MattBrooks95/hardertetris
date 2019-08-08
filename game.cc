@@ -394,31 +394,24 @@ void game::move_tet(tetromino* move_me){
 	move_type curr_move = move_list.front();
 	move_list.pop();
 	switch(curr_move){
-
 		case move_left:
 			move_piece_left(move_me);
 			break;
-
 		case move_right:
 			move_piece_right(move_me);
 			break;
-
 		case rot_right:
 			move_me->rot_right();
 			break;
-
 		case rot_left:
 			move_me->rot_left();
 			break;
-
 		case medium_drop:
 			drop_piece(move_me);
 			break;
-
 		case fast_drop:
 			fast_drop_piece(move_me);
 			break;
-
 		default:
 			cout << "I don't know how this happened, but bad enum move_type in move_tet." << endl;
 	}

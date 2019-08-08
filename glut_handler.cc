@@ -230,7 +230,6 @@ void glut_handler::timerfunc(int value){
 					case 0:
 						gaze_access->right_side_view();
 						break;
-
 					case 1:
 						gaze_access->left_side_view();
 						break;
@@ -250,7 +249,7 @@ void glut_handler::timerfunc(int value){
 			} else {
 				strange_view = false;
 				gaze_access->normal_view();
-				context_switch_seconds = 20;
+				context_switch_seconds = 14;
 			}
 		}
 	}
