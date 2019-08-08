@@ -239,7 +239,6 @@ void glut_handler::timerfunc(int value){
 					case 3:
 						gaze_access->upside_down_view();
 						break;
-
 					default:
 						cout << "Bad camera position!" << endl;
 						exit(-1);
