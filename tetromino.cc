@@ -32,7 +32,6 @@ tetromino::tetromino(const tetromino& other){
 
 //######################################################################################
 void tetromino::init(const string& color, const tet_request* cube_locs){
-
 	unsigned int column1, column2, column3, column4;
 
 	column1 = cube_locs->cubes[0].column;
@@ -99,7 +98,6 @@ bool tetromino::dead(){
 
 //######################################################################################
 void tetromino::up_pos(){
-
 	position += 1;
 	position = position % 4;
 }
@@ -119,7 +117,6 @@ void tetromino::down_pos(){
 //                   0
 //                 2 1 3
 bool t_block::rot_left(){
-
 	deactivate_cubes();
 
 	if(check_left()){
@@ -172,7 +169,6 @@ bool t_block::rot_left(){
 
 //######################################################################################
 bool t_block::rot_right(){
-
 	deactivate_cubes();
 
 	if(check_right()){
@@ -227,7 +223,6 @@ bool t_block::rot_right(){
 
 //######################################################################################
 void t_block::deactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
@@ -246,7 +241,6 @@ void t_block::deactivate_cubes(){
 
 //######################################################################################
 void t_block::reactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
@@ -265,7 +259,6 @@ void t_block::reactivate_cubes(){
 
 //######################################################################################
 bool t_block::check_left(){
-
 		int cols[TET_SIZE];
 		int rows[TET_SIZE];
 
@@ -329,7 +322,6 @@ bool t_block::check_left(){
 
 //######################################################################################
 bool t_block::check_right(){
-
 	int cols[TET_SIZE];
 	int rows[TET_SIZE];
 
@@ -390,7 +382,6 @@ bool t_block::check_right(){
 			exit(-1);
 		}
 	return true;
-
 }
 //######################################################################################
 
@@ -399,7 +390,6 @@ bool t_block::check_right(){
 //            2 0
 //              1 3
 bool l_z_block::rot_left(){
-
 	deactivate_cubes();
 	if(check_left()){
 		switch(position){
@@ -446,7 +436,6 @@ bool l_z_block::rot_left(){
 
 //######################################################################################
 bool l_z_block::rot_right(){
-
 	deactivate_cubes();
 	if(check_right()){
 		switch(position){
@@ -493,7 +482,6 @@ bool l_z_block::rot_right(){
 
 //######################################################################################
 void l_z_block::deactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
@@ -509,7 +497,6 @@ void l_z_block::deactivate_cubes(){
 
 //######################################################################################
 void l_z_block::reactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
@@ -526,7 +513,6 @@ void l_z_block::reactivate_cubes(){
 
 //######################################################################################
 bool l_z_block::check_left(){
-
 	unsigned int cols[TET_SIZE];
 	unsigned int rows[TET_SIZE];
 
@@ -589,7 +575,6 @@ bool l_z_block::check_left(){
 
 //######################################################################################
 bool l_z_block::check_right(){
-
 	unsigned int cols[TET_SIZE];
 	unsigned int rows[TET_SIZE];
 
@@ -656,7 +641,6 @@ bool l_z_block::check_right(){
 //          0 2
 //        3 1
 bool r_z_block::rot_left(){
-
 	deactivate_cubes();
 	if(check_left()){
 		switch(position){
@@ -703,7 +687,6 @@ bool r_z_block::rot_left(){
 
 //######################################################################################
 bool r_z_block::rot_right(){
-
 	deactivate_cubes();
 	if(check_right()){
 		switch(position){
@@ -750,7 +733,6 @@ bool r_z_block::rot_right(){
 
 //######################################################################################
 void r_z_block::deactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
@@ -766,7 +748,6 @@ void r_z_block::deactivate_cubes(){
 
 //######################################################################################
 void r_z_block::reactivate_cubes(){
-
 	unsigned int col;
 	unsigned int row;
 
