@@ -44,7 +44,6 @@ game::~game(){
 
 //######################################################################################
 void game::size_board(unsigned int columns, unsigned int rows){
-
 	//set up the columns of the board state
 	board_state.resize(columns);
 
@@ -85,7 +84,6 @@ void game::calculate_positions(){
 
 //######################################################################################
 void game::make_scene(){
-
 	//make the vertex array
 	glGenVertexArrays(1,&my_vao);
 
@@ -237,7 +235,6 @@ void game::build_scene_vertices(){
 
 //######################################################################################
 void game::build_board_vertices(){
-
 	GLfloat cube = cube_radius * 2;
 
 	//lines for the board's perimeter
@@ -380,7 +377,6 @@ void game::calc_game_state(){
 
 //######################################################################################
 void game::move_tet(tetromino* move_me){
-
 	//leave if there is no input in the queue
 	if(move_list.empty()){
 		return;
@@ -494,7 +490,6 @@ void game::clean_list(){
 
 //######################################################################################
 void game::move_down_after_clear(vector<int>& clear_indices){
-
 	//note that the function that fills in clear_indices
 	//(clear rows) walks the game board top to bottom,
 	//this is handy because at each cleared row, we can make all the cubes above that
