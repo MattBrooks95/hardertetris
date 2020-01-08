@@ -13,8 +13,9 @@ vector<string> split(string split_me, char delim){
 	char temp = split_me[index];
 
 	string push_me;
-	bool constant_string = false; //control logics in regards to ignoring delimiting characters within
-				      // a constant string, like label = "this shouldn't be split"	
+	//control logics in regards to ignoring delimiting characters within
+	// a constant string, like label = "this shouldn't be split"
+	bool constant_string = false;
 	while( index < split_me.size() ){ // go until end of string is reached
 		push_me = "";//reset new word container
 
@@ -64,42 +65,22 @@ void print_tokens(ostream& outs, const vector<string>& print_me){
 }
 
 void trim(std::string& base_string,unsigned int remove_num){
-	//cout << "Base string before: " << base_string << endl;
 	if(remove_num > base_string.length()){
 		return;
 	} else {
-		
+
 		base_string.erase(base_string.length() - remove_num, remove_num);
 
 	}
-
-	//cout << "Base string after: " << base_string << endl;
 }
 
 
 void strip_char(std::string& string_in,char strip_me){
-	//cout << "String passed to strip_me:" << string_in << endl;
-		//cout << "String passed to strip_me:" << string_in << endl;
 	string temp_string;
 	for(unsigned int c = 0; c < string_in.size();c++){
 		if( string_in[c] != strip_me){
 			temp_string += string_in[c];
 		}
 	}
-	//cout << "String at end of function:" << string_in << endl;
 	string_in = temp_string;
-	//cout << "String at end of function:" << string_in << endl;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
